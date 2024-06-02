@@ -21,7 +21,8 @@ const app = express();
 
 // Enable CORS for a specific origin
 const corsOptions = {
-  origin: 'http://http://localhost:3001'
+  origin: ["*",'https://booksonline-server.vercel.app/',"booksonline-server-ftjoig899-nasir-hanifs-projects.vercel.app"],
+  credentials: true,
  
 };
 
