@@ -46,6 +46,8 @@ app.use("/api/v1/product", productRoutes);
 //PORT
 const port = process.env.PORT || 3000;
 
+
+/*
 app.listen(port, () => {
   console.log(
     `Server Running on ${process.env.DEV_MODE} mode on port ${port}`.bgCyan
@@ -53,18 +55,18 @@ app.listen(port, () => {
   )
 })
 
+*/
 
 
-/*
 //Connect to the database before listening
 connectDB().then(() => {
-  app.listen(PORT, () => {
+  app.listen(port, () => {
     console.log(
-      `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
+      `Server Running on ${process.env.DEV_MODE} mode on port ${port}`.bgCyan
         .white
     )
   })
 })
 
-*/
+
 
