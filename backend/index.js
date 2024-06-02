@@ -21,7 +21,7 @@ const app = express();
 
 // Enable CORS for a specific origin
 const corsOptions = {
-  origin: 'https://booksonline-server.vercel.app/'
+  origin: 'http://http://localhost:3001'
  
 };
 
@@ -44,7 +44,7 @@ app.use("/api/v1/product", productRoutes);
 
 
 //PORT
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 
 /*
