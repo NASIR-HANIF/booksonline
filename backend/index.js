@@ -19,8 +19,16 @@ connectDB();
 //rest object
 const app = express();
 
+// Enable CORS for a specific origin
+const corsOptions = {
+  origin: 'https://booksonline-server.vercel.app', 
+  optionsSuccessStatus: 200 
+};
+
+
+
 //middelwares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.json({extended : true}))
@@ -34,10 +42,6 @@ app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
 
 
-// Root URL
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
 
 //PORT
 const port = process.env.PORT || 3000;
@@ -48,7 +52,8 @@ app.listen(port, () => {
       .white
   )
 })
-
+// Export the Express API
+module.exports = app;
 
 /*
 //Connect to the database before listening
