@@ -21,8 +21,8 @@ const app = express();
 
 // Enable CORS for a specific origin
 const corsOptions = {
-  origin: 'https://booksonline-server.vercel.app', 
-  optionsSuccessStatus: 200 
+  origin: 'https://booksonline-server.vercel.app/'
+ 
 };
 
 
