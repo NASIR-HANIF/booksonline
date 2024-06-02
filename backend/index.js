@@ -52,8 +52,8 @@ app.listen(port, () => {
       .white
   )
 })
-// Export the Express API
-module.exports = app;
+
+
 
 /*
 //Connect to the database before listening
