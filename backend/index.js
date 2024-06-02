@@ -7,16 +7,11 @@ import authRoutes from "./routes/authRoute.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import cors from "cors";
-// import path, { dirname } from "path";
 
-
-// import {fileURLToPath} from 'url'
 
 //configure env
 dotenv.config();
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename)
 
 //databse config
 connectDB();
@@ -30,6 +25,8 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.json({extended : true}))
 app.use(express.urlencoded({extended : true}))
+app.use(express.static('public'));
+
 
 //routes
 app.use("/api/v1/auth", authRoutes);
@@ -37,30 +34,17 @@ app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
 
 
-
-//  app.use(express.static(path.join(__dirname , "/client/build")))
-
-
-//rest api
-// app.get("*", function(req, res){
-//   res.sendFile(path.join(__dirname , "/client/build/index.html"),function(error){
-//     console.log(__dirname)
-//     res.status(500).send(error)
-//   })
-// });
+// Root URL
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
 
 //PORT
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
-
-
-
-//Connect to the database before listening
-connectDB()
-
-app.listen(PORT, () => {
+app.listen(port, () => {
   console.log(
-    `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
+    `Server Running on ${process.env.DEV_MODE} mode on port ${port}`.bgCyan
       .white
   )
 })
