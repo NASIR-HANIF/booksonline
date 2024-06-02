@@ -11,11 +11,23 @@ const CreateCategory = () => {
   const [visible, setVisible] = useState(false);
   const [selected, setSelected] = useState(null);
   const [updatedName, setUpdatedName] = useState("");
+
+  const API_URL = process.env.NODE_ENV === "production"
+  ? "https://booksonline-server.vercel.app"
+  : "http://localhost:5000";
+  
+  
+   const host = `${API_URL}`;
+  
+  const API = axios.create({
+    baseURL: host,
+  });
+
   //handle Form
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/category/create-category", {
+      const { data } = await API.post("/api/v1/category/create-category", {
         name,
       });
       if (data?.success) {
@@ -33,7 +45,7 @@ const CreateCategory = () => {
   //get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await API.get("/api/v1/category/get-category");
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -51,7 +63,7 @@ const CreateCategory = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put(
+      const { data } = await API.put(
         `/api/v1/category/update-category/${selected._id}`,
         { name: updatedName }
       );
@@ -71,7 +83,7 @@ const CreateCategory = () => {
   //delete category
   const handleDelete = async (pId) => {
     try {
-      const { data } = await axios.delete(
+      const { data } = await API.delete(
         `/api/v1/category/delete-category/${pId}`
       );
       if (data.success) {

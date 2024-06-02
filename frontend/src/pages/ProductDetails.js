@@ -6,6 +6,17 @@ import "../styles/ProductDetailsStyles.css";
 import { useCart } from "../context/cart";
 import toast from "react-hot-toast";
 
+const API_URL = process.env.NODE_ENV === "production"
+? "https://booksonline-server.vercel.app"
+: "http://localhost:5000";
+
+
+export const host = `${API_URL}`;
+
+const API = axios.create({
+  baseURL: host,
+});
+
 const ProductDetails = () => {
   const [cart, setCart] = useCart();
   const params = useParams();
@@ -20,7 +31,7 @@ const ProductDetails = () => {
   //getProduct
   const getProduct = async () => {
     try {
-      const { data } = await axios.get(
+      const { data } = await API.get(
         `/api/v1/product/get-product/${params.slug}`
       );
       setProduct(data?.product);
@@ -32,7 +43,7 @@ const ProductDetails = () => {
   //get similar product
   const getSimilarProduct = async (pid, cid) => {
     try {
-      const { data } = await axios.get(
+      const { data } = await API.get(
         `/api/v1/product/related-product/${pid}/${cid}`
       );
       setRelatedProducts(data?.products);

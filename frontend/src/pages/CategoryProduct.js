@@ -3,6 +3,17 @@ import Layout from "../components/Layout/Layout";
 import { useParams, useNavigate } from "react-router-dom";
 import "../styles/CategoryProductStyles.css";
 import axios from "axios";
+const API_URL = process.env.NODE_ENV === "production"
+? "https://booksonline-server.vercel.app"
+: "http://localhost:5000";
+
+
+export const host = `${API_URL}`;
+
+const API = axios.create({
+  baseURL: host,
+});
+
 const CategoryProduct = () => {
   const params = useParams();
   const navigate = useNavigate();
@@ -14,7 +25,7 @@ const CategoryProduct = () => {
   }, [params?.slug]);
   const getPrductsByCat = async () => {
     try {
-      const { data } = await axios.get(
+      const { data } = await API.get(
         `/api/v1/product/product-category/${params.slug}`
       );
       setProducts(data?.products);

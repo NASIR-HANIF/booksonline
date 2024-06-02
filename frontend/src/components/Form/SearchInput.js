@@ -2,6 +2,18 @@ import React from "react";
 import { useSearch } from "../../context/search";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+const API_URL = process.env.NODE_ENV === "production"
+? "https://booksonline-server.vercel.app"
+: "http://localhost:5000";
+
+
+export const host = `${API_URL}`;
+
+const API = axios.create({
+  baseURL: host,
+});
+
 const SearchInput = () => {
   const [values, setValues] = useSearch();
   const navigate = useNavigate();
@@ -9,7 +21,7 @@ const SearchInput = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get(
+      const { data } = await API.get(
         `/api/v1/product/search/${values.keyword}`
       );
       setValues({ ...values, results: data });

@@ -13,6 +13,16 @@ const Profile = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const API_URL = process.env.NODE_ENV === "production"
+? "https://booksonline-server.vercel.app"
+: "http://localhost:5000";
+
+
+ const host = `${API_URL}`;
+
+const API = axios.create({
+  baseURL: host,
+});
 
   //get user data
   useEffect(() => {
@@ -27,7 +37,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.put("/api/v1/auth/profile", {
+      const { data } = await API.put("/api/v1/auth/profile", {
         name,
         email,
         password,

@@ -4,13 +4,25 @@ import Layout from "./../../components/Layout/Layout";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+
+const API_URL = process.env.NODE_ENV === "production"
+? "https://booksonline-server.vercel.app"
+: "http://localhost:5000";
+
+
+export const host = `${API_URL}`;
+
+const API = axios.create({
+  baseURL: host,
+});
+
 const Products = () => {
   const [products, setProducts] = useState([]);
 
   //getall products
   const getAllProducts = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/get-product");
+      const { data } = await API.get("/api/v1/product/get-product");
       setProducts(data.products);
     } catch (error) {
       console.log(error);

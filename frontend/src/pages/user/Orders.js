@@ -5,12 +5,23 @@ import axios from "axios";
 import { useAuth } from "../../context/auth";
 import moment from "moment";
 
+const API_URL = process.env.NODE_ENV === "production"
+? "https://booksonline-server.vercel.app"
+: "http://localhost:5000";
+
+
+export const host = `${API_URL}`;
+
+const API = axios.create({
+  baseURL: host,
+});
+
 const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [auth, setAuth] = useAuth();
   const getOrders = async () => {
     try {
-      const { data } = await axios.get("/api/v1/auth/orders");
+      const { data } = await API.get("/api/v1/auth/orders");
       setOrders(data);
     } catch (error) {
       console.log(error);
