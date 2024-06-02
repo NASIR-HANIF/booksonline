@@ -1,7 +1,7 @@
 {
-  "name": "ecommerce-app-2023",
+  "name": "booksonline",
   "version": "1.0.0",
-  "description": "ecommerce rest api",
+  "description": "booksonline store",
   "main": "index.js",
   "type": "module",
   "scripts": {

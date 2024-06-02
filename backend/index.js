@@ -56,6 +56,18 @@ const PORT = process.env.PORT || 3000;
 
 
 //Connect to the database before listening
+connectDB()
+
+app.listen(PORT, () => {
+  console.log(
+    `Server Running on ${process.env.DEV_MODE} mode on port ${PORT}`.bgCyan
+      .white
+  )
+})
+
+
+/*
+//Connect to the database before listening
 connectDB().then(() => {
   app.listen(PORT, () => {
     console.log(
@@ -65,5 +77,5 @@ connectDB().then(() => {
   })
 })
 
-
+*/
 
